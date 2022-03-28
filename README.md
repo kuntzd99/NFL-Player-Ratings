@@ -10,7 +10,7 @@
 
 ### **_Description_**
 
-This website contains user-inputted ratings of various NFL players. Users can even create their own NFL players or their own NFL teams.
+This website rates NFL players based on their position. Users are able to adjust player ratings, comment on players, and create thier own NFL player or team.
 
 ---
 
@@ -22,7 +22,7 @@ The website is created using MongoDB, Express, React, and Node. CSS is used to s
 
 ### **_Getting Started_**
 
-Go to the website and click on any team to view its players.
+Go to the website and click on any team to view its players. Click on a player to view the player's ratings.
 
 ---
 
