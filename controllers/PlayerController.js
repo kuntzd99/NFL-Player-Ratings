@@ -5,7 +5,7 @@ const getPlayersByTeam = async (req, res) => {
     const allPlayers = await Player.find()
     let players = []
     allPlayers.forEach((player) => {
-      if (player.team._id == req.params.id) {
+      if (player.team[0] == req.params.teamId) {
         players.push(player)
       }
     })
@@ -18,6 +18,19 @@ const getPlayersByTeam = async (req, res) => {
   }
 }
 
+const getPlayerById = async (req, res) => {
+  try {
+    const player = await Player.findById(req.params.playerId)
+    if (player) {
+      return res.status(200).json({ player })
+    }
+    return res.status(404).send('Player with specified ID does not exist')
+  } catch (error) {
+    return res.status(500).send(error.message)
+  }
+}
+
 module.exports = {
-  getPlayersByTeam
+  getPlayersByTeam,
+  getPlayerById
 }

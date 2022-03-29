@@ -13,13 +13,18 @@ const Players = () => {
     const response = await axios.get(
       `http://localhost:3001/api/players/${team[0].teamId}`
     )
-    console.log(response)
     setPlayers(response.data.players)
   }
 
   useEffect(() => {
     getPlayers()
   }, [])
+
+  let navigate = useNavigate()
+
+  const showPlayerDetails = (playerId) => {
+    navigate(`/details/${playerId}`)
+  }
 
   return (
     <div>
@@ -36,6 +41,7 @@ const Players = () => {
               name={player.name}
               number={player.number}
               image={player.image}
+              onClick={() => showPlayerDetails(player._id)}
             />
           </div>
         ))}

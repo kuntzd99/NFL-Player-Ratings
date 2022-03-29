@@ -7,4 +7,6 @@ router.get('/teams', teamControllers.getAllTeams)
 
 router.get('/players/:teamId', playerControllers.getPlayersByTeam)
 
+router.get('/details/:playerId', playerControllers.getPlayerById)
+
 module.exports = router
