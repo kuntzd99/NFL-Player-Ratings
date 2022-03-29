@@ -13,8 +13,13 @@ const Teams = () => {
 
   useEffect(() => {
     getTeams()
-    console.log(teams)
   }, [])
+
+  let navigate = useNavigate()
+
+  const showPlayers = (teamId) => {
+    navigate(`/players/${teamId}`)
+  }
 
   return (
     <div>
@@ -22,11 +27,6 @@ const Teams = () => {
         <h1>Teams</h1>
         <div className="team-card">
           <h3>Add team</h3>
-          <img
-            className="add-team-image"
-            src="https://static.vecteezy.com/system/resources/previews/002/935/386/non_2x/rugby-american-football-vector.jpg"
-            alt="football"
-          />
         </div>
       </div>
       <div className="teams-container">
@@ -36,6 +36,7 @@ const Teams = () => {
               name={team.name}
               location={team.location}
               image={team.image}
+              onClick={() => showPlayers(team._id)}
             />
           </div>
         ))}

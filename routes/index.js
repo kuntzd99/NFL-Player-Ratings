@@ -1,7 +1,10 @@
 const { Router } = require('express')
-const controllers = require('../controllers/TeamController')
+const teamControllers = require('../controllers/TeamController')
+const playerControllers = require('../controllers/PlayerController')
 const router = Router()
 
-router.get('/teams', controllers.getAllTeams)
+router.get('/teams', teamControllers.getAllTeams)
+
+router.get('/players/:teamId', playerControllers.getPlayersByTeam)
 
 module.exports = router
