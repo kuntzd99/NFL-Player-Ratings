@@ -1,39 +1,58 @@
 import { useState } from "react"
 import axios from "axios"
+import { useNavigate } from "react-router-dom"
 
 const TeamCard = (props) => {
   const [editing, toggleEditing] = useState(false)
-  const [teamName, setTeamName] = useState('')
+  const [location, setLocation] = useState(props.location)
+  const [teamName, setTeamName] = useState(props.name)
 
   const editTeam = () => {
     toggleEditing(!editing)
   }
 
-  const handleChange = (e) => {
+  const handleLocationChange = (e) => {
+    e.preventDefault()
+    setLocation(e.target.value)
+  }
+
+  const handleNameChange = (e) => {
     e.preventDefault()
     setTeamName(e.target.value)
   }
 
-  const handleOnSubmit = async () => {
+  let navigate = useNavigate()
+
+  const handleOnSubmit = async (e) => {
+    const packagedPayLoad = {
+      name: teamName,
+      location: location,
+      image: props.image,
+      teamColors: props.teamColors
+    }
     e.preventDefault()
+    await axios.put(`http://localhost:3001/api/teams/${props.id}`, packagedPayLoad).catch((err) => console.log(err))
     toggleEditing(!editing)
   }
 
-  <form onSubmit={handleOnSubmit}>
-    <input onChange={handleChange} type="text" />
-    <img className="team-image" src={props.image} alt={props.name} />
-    <button type="submit">Submit</button>
-  </form>
-
-  let display
-
   return(
     <div>
-      {editing ? <div className="team-card"></div> :
-      <div className="team-card" onClick={props.onClick}>
-        <h3>{props.location} {props.name}</h3>
+      {editing ? 
+      <div className="team-card">
+        <form onSubmit={handleOnSubmit}>
+        <input onChange={handleLocationChange} type="text" placeholder="Location" />
+        <input onChange={handleNameChange} type="text" placeholder="Team Name" />
         <img className="team-image" src={props.image} alt={props.name} />
-        <button>Edit</button>
+        <button type="submit">Submit</button>
+        </form>
+      </div> 
+      :
+      <div>
+        <div className="team-card" onClick={props.onClick}>
+          <h3>{location} {teamName}</h3>
+          <img className="team-image" src={props.image} alt={teamName} />
+        </div>
+        <button onClick={() => toggleEditing(!editing)}>Edit</button>
       </div>
       }
     </div>

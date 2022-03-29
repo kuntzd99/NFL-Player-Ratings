@@ -36,6 +36,8 @@ const Teams = () => {
               name={team.name}
               location={team.location}
               image={team.image}
+              teamColors={team.teamColors}
+              id={team._id}
               onClick={() => showPlayers(team._id)}
             />
           </div>
