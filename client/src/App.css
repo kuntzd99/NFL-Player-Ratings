@@ -60,3 +60,7 @@ header {
 a {
   margin: 20px;
 }
+
+.player-details {
+  text-align: center;
+}

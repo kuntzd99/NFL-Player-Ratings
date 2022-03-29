@@ -9,4 +9,8 @@ router.get('/players/:teamId', playerControllers.getPlayersByTeam)
 
 router.get('/details/:playerId', playerControllers.getPlayerById)
 
+router.get('/teams/:teamId', teamControllers.getTeamById)
+
+router.put('/teams/:teamId', teamControllers.editTeam)
+
 module.exports = router
