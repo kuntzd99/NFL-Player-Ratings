@@ -21,8 +21,6 @@ const TeamCard = (props) => {
     setTeamName(e.target.value)
   }
 
-  let navigate = useNavigate()
-
   const handleOnSubmit = async (e) => {
     const packagedPayLoad = {
       name: teamName,
@@ -35,15 +33,22 @@ const TeamCard = (props) => {
     toggleEditing(!editing)
   }
 
+  let navigate = useNavigate()
+
+  const deleteTeam = async () => {
+    await axios.delete(`http://localhost:3001/api/teams/${props.id}`)
+    navigate('/teams')
+  }
+
   return(
     <div>
       {editing ? 
       <div className="team-card">
         <form onSubmit={handleOnSubmit}>
-        <input onChange={handleLocationChange} type="text" placeholder="Location" />
-        <input onChange={handleNameChange} type="text" placeholder="Team Name" />
-        <img className="team-image" src={props.image} alt={props.name} />
-        <button type="submit">Submit</button>
+          <input onChange={handleLocationChange} type="text" placeholder="Location" />
+          <input onChange={handleNameChange} type="text" placeholder="Team Name" />
+          <img className="team-image" src={props.image} alt={props.name} />
+          <button type="submit">Submit</button>
         </form>
       </div> 
       :
@@ -53,6 +58,7 @@ const TeamCard = (props) => {
           <img className="team-image" src={props.image} alt={teamName} />
         </div>
         <button onClick={() => toggleEditing(!editing)}>Edit</button>
+        <button onClick={deleteTeam}>Delete</button>
       </div>
       }
     </div>

@@ -32,6 +32,13 @@ const PlayerDetails = () => {
     navigate(`/players/${teamId}`)
   }
 
+  const handleChange = (e) => {
+    let newRatings = ratings
+    newRatings[e.target.name.toString()] = parseInt(e.target.value)
+    setRatings(newRatings)
+    console.log(ratings)
+  }
+
   return (
     <div className="player-details">
       <h1>
@@ -48,12 +55,22 @@ const PlayerDetails = () => {
         src={player.image}
         alt={player.name}
       />
-      {Object.keys(ratings).map((rating) => (
-        <div key={rating}>
-          {rating}: {player.ratings[rating.toString()]}
-        </div>
-      ))}
-      <input type="range" min="1" max="100" />
+      <form>
+        {Object.keys(ratings).map((rating) => (
+          <div key={rating}>
+            {rating}:{' '}
+            <input
+              name={rating}
+              onChange={handleChange}
+              type="range"
+              min="1"
+              max="100"
+              //value={ratings[rating.toString()]}
+            />{' '}
+            {ratings[rating.toString()]}
+          </div>
+        ))}
+      </form>
     </div>
   )
 }
