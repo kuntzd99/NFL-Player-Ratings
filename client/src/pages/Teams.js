@@ -25,11 +25,12 @@ const Teams = () => {
     <div>
       <div className="teams-header">
         <h1>Teams</h1>
-        <div className="team-card">
-          <h3>Add team</h3>
-        </div>
       </div>
       <div className="teams-container">
+        <div className="team-card add-team">
+          <h3>Add team</h3>
+          <h1>+</h1>
+        </div>
         {teams.map((team) => (
           <div key={team._id}>
             <TeamCard

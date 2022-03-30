@@ -13,4 +13,6 @@ router.get('/teams/:teamId', teamControllers.getTeamById)
 
 router.put('/teams/:teamId', teamControllers.editTeam)
 
+router.post('/teams', teamControllers.createTeam)
+
 module.exports = router

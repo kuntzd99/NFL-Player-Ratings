@@ -53,12 +53,16 @@ const TeamCard = (props) => {
       </div> 
       :
       <div>
-        <div className="team-card" onClick={props.onClick}>
-          <h3>{location} {teamName}</h3>
-          <img className="team-image" src={props.image} alt={teamName} />
+        <div className="team-card">
+          <div onClick={props.onClick}>
+            <h3>{location} {teamName}</h3>
+            <img className="team-image" src={props.image} alt={teamName} />
+          </div>
+          <div className="button-container">
+            <button onClick={() => toggleEditing(!editing)}>Edit</button>
+            <button onClick={deleteTeam}>Delete</button>
+          </div>
         </div>
-        <button onClick={() => toggleEditing(!editing)}>Edit</button>
-        <button onClick={deleteTeam}>Delete</button>
       </div>
       }
     </div>

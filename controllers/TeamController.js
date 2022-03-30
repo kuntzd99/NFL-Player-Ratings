@@ -35,8 +35,19 @@ const editTeam = async (req, res) => {
   }
 }
 
+const createTeam = async (req, res) => {
+  try {
+    const team = await new Team(req.body)
+    await team.save()
+    return res.status(201).json({ team })
+  } catch (error) {
+    return res.status(500).send(error.message)
+  }
+}
+
 module.exports = {
   getAllTeams,
   getTeamById,
-  editTeam
+  editTeam,
+  createTeam
 }
