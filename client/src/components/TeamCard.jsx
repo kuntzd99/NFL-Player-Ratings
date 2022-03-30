@@ -1,15 +1,11 @@
 import { useState } from "react"
 import axios from "axios"
-import { useNavigate } from "react-router-dom"
 
 const TeamCard = (props) => {
   const [editing, toggleEditing] = useState(false)
   const [location, setLocation] = useState(props.location)
   const [teamName, setTeamName] = useState(props.name)
-
-  const editTeam = () => {
-    toggleEditing(!editing)
-  }
+  const [deleted, toggleDeleted] = useState(false)
 
   const handleLocationChange = (e) => {
     e.preventDefault()
@@ -33,16 +29,15 @@ const TeamCard = (props) => {
     toggleEditing(!editing)
   }
 
-  let navigate = useNavigate()
-
   const deleteTeam = async () => {
     await axios.delete(`http://localhost:3001/api/teams/${props.id}`)
-    navigate('/teams')
+    toggleDeleted(true)
   }
 
   return(
     <div>
-      {editing ? 
+      {deleted ? <div></div> :
+      editing ? 
       <div className="team-card">
         <form onSubmit={handleOnSubmit}>
           <input onChange={handleLocationChange} type="text" placeholder="Location" />
