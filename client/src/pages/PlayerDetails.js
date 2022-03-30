@@ -35,6 +35,7 @@ const PlayerDetails = () => {
   const handleChange = (e) => {
     let newRatings = ratings
     newRatings[e.target.name.toString()] = parseInt(e.target.value)
+    console.log(newRatings)
     setRatings(newRatings)
     console.log(ratings)
   }
@@ -56,20 +57,18 @@ const PlayerDetails = () => {
         alt={player.name}
       />
       <form>
-        {Object.keys(ratings).map((rating) => (
-          <div key={rating}>
-            {rating}:{' '}
-            <input
-              name={rating}
-              onChange={handleChange}
-              type="range"
-              min="1"
-              max="100"
-              //value={ratings[rating.toString()]}
-            />{' '}
-            {ratings[rating.toString()]}
-          </div>
-        ))}
+        <div>
+          <label>Speed:</label>
+          <input
+            name="speed"
+            onChange={handleChange}
+            type="range"
+            min="1"
+            max="100"
+            //value={ratings[rating.toString()]}
+          />
+          {ratings.speed}
+        </div>
       </form>
     </div>
   )

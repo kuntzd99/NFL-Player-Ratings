@@ -84,3 +84,18 @@ a {
 button {
   margin: 0 5px;
 }
+
+.player-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.form-element {
+  padding: 10px 0;
+}
+
+input {
+  margin: 0 5px;
+}

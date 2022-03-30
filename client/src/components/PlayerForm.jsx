@@ -1,16 +1,26 @@
 import axios from "axios"
-import { useState } from "react"
-import { useNavigate } from "react-router-dom"
+import { useEffect, useState } from "react"
+import { useNavigate, useParams } from "react-router-dom"
 
 const PlayerForm = () => {
   const [name, setName] = useState('')
   const [number, setNumber] = useState(0)
   const [image, setImage] = useState('')
+  const [team, setTeam] = useState('')
   const [heightFeet, setHeightFeet] = useState('')
   const [heightInches, setHeightInches] = useState('')
   const [weight, setWeight] = useState('')
+  const [position, setPosition] = useState('')
   const [shortened, setShortened] = useState('')
+  const [ratingsModel, setRatingsModel] = useState('')
   const [ratings, setRatings] = useState ({})
+
+  const { teamId } = useParams()
+
+  useEffect(() => {
+    setTeam(teamId)
+    getRatingsModel()
+  }, [shortened])
 
   const handleNameChange = (e) => {
     e.preventDefault()
@@ -42,46 +52,207 @@ const PlayerForm = () => {
     setWeight(e.target.value)
   }
 
-  const handleShortenedChange = (e) => {
+  const handleRatingChange = (e) => {
     e.preventDefault()
-    set(e.target.value)
+    let newRatings = ratings
+    newRatings[e.target.name.toString()] = e.target.value
+    setRatings(newRatings)
+  }
+
+  const getRatingsModel = () => {
+    switch (shortened) {
+      case "WR":
+        setPosition('Wide Receiver')
+        setRatingsModel(
+        <div>
+          <div className="form-element">
+            <label>Speed: </label>
+            <input
+              onChange={handleRatingChange}
+              name="speed"
+              type="number"
+              min="1"
+              max="100"
+              required
+            />
+          </div>
+          <div className="form=element">
+            <label>Route Running: </label>
+            <input
+              onChange={handleRatingChange}
+              name="routeRunning"
+              type="number"
+              min="1"
+              max="100"
+              required
+            />
+          </div>
+          <div className="form-element">
+            <label>Hands: </label>
+            <input
+              onChange={handleRatingChange}
+              name="hands"
+              type="number"
+              min="1"
+              max="100"
+            />
+          </div>
+          <div className="form-element">
+            <label>Jumping: </label>
+            <input
+              onChange={handleRatingChange}
+              name="jumping"
+              type="number"
+              min="1"
+              max="100"
+            />
+          </div>
+          <div className="form-element">
+            <label>Release: </label>
+            <input
+              onChange={handleRatingChange}
+              name="release"
+              type="number"
+              min="1"
+              max="100"
+            />
+          </div>
+        </div>)
+        break
+      case "QB":
+        setPosition("Quarterback")
+        setRatingsModel(
+          <div>
+          <div className="form-element">
+            <label>Speed: </label>
+            <input
+              onChange={handleRatingChange}
+              name="speed"
+              type="number"
+              min="1"
+              max="100"
+              required
+            />
+          </div>
+          <div className="form-element">
+            <label>Throw Power: </label>
+            <input
+              onChange={handleRatingChange}
+              name="throwPower"
+              type="number"
+              min="1"
+              max="100"
+              required
+            />
+          </div>
+          <div className="form-element">
+            <label>Throw Accuracy: </label>
+            <input
+              onChange={handleRatingChange}
+              name="throwAccuracy"
+              type="number"
+              min="1"
+              max="100"
+              required
+            />
+          </div>
+          <div className="form-element">
+            <label>Awareness: </label>
+            <input
+              onChange={handleRatingChange}
+              name="awareness"
+              type="number"
+              min="1"
+              max="100"
+              required
+            />
+          </div>
+          <div className="form-element">
+            <label>Vision: </label>
+            <input
+              onChange={handleRatingChange}
+              name="vision"
+              type="number"
+              min="1"
+              max="100"
+              required
+            />
+          </div>
+        </div>)
+        break 
+    }
+  }
+
+  const handlePositionChange = (e) => {
+    e.preventDefault()
+    setShortened(e.target.value)
+  }
+
+  let navigate = useNavigate()
+
+  const handleOnSubmit = async (e) => {
+    const packagedPayLoad = {
+      name: name,
+      number: number,
+      image: image,
+      team: team,
+      height: `${heightFeet}' ${heightInches}`,
+      weight: `${weight} lbs`,
+      position: position,
+      shortened: shortened,
+      ratings: ratings
+    }
+    if (image === '') {
+      packagedPayLoad.image = 'https://upload.wikimedia.org/wikipedia/en/thumb/a/a2/National_Football_League_logo.svg/1200px-National_Football_League_logo.svg.png'
+    }
+    e.preventDefault()
+    axios.post(`http://localhost:3001/api/players/`, packagedPayLoad).catch((err) => console.log(err))
+    navigate(`/players/${team}`)
   }
 
   return(
-    <form onSubmit={handleOnSubmit}>
-      <label>
-        Name:
-        <input onChange={handleNameChange} type="text" name="name" />
-      </label>
-      <label>
-        Number:
-        <input onChange={handleNumberChange} type="number" name="number" />
-      </label>
-      <label>
-        Image:
+    <form className="player-form" onSubmit={handleOnSubmit}>
+      <div className="form-element">
+        <label>Name: </label>
+        <input onChange={handleNameChange} type="text" name="name" required />
+      </div>
+      <div className="form-element">
+        <label>Number: </label>
+        <input onChange={handleNumberChange} type="number" name="number" required />
+      </div>
+      <div className="form-element">
+        <label>Image: </label>
         <input onChange={handleImageChange} type="text" name="image" />
-      </label>
-      <label>
-        Height:
-        <input onChange={handleHeightFeetChange} type="text" name="heightFeet" /> '
-        <input onChange={handleHeightInchesChange} type="text" name="heightIches" /> "
-      </label>
-      <label>
-        Weight:
-        <input onChange={handleWeightChange} type="text" name="weight" /> lbs
-      </label>
-      <label>Position:</label>
-      <select onChange={handleShortenedChange} name="shortened">
-        <optgroup label="Offense">
-          <option value="WR">WR</option>
-          <option value="QB">QB</option>
-          <option value="RB">RB</option>
-        </optgroup>
-        <optgroup label="Defense">
-          <option value="LB">LB</option>
-        </optgroup>
-      </select>
-      <label>Ratings:</label>
+      </div>
+      <div className="form-element">
+        <label>Height: </label>
+        <input onChange={handleHeightFeetChange} type="number" name="heightFeet" required />'
+        <input onChange={handleHeightInchesChange} type="number" min="0" max="11" name="heightIches" required /> "
+      </div>
+      <div className="form-element">
+        <label>Weight: </label>
+        <input onChange={handleWeightChange} type="number" name="weight" required />lbs
+      </div>
+      <div className="form-element">
+        <label>Position:</label>
+        <select onChange={handlePositionChange} name="position" required>
+          <option value="none">Choose a position</option>
+          <optgroup label="Offense">
+            <option value="QB">Quarterback</option>
+            <option value="WR">Wide Receiver</option>
+            <option value="RB">Runningback</option>
+          </optgroup>
+          <optgroup label="Defense">
+            <option value="LB">Linebacker</option>
+          </optgroup>
+        </select>
+      </div>
+      <div className="form-element">
+        {ratingsModel}
+      </div>
+      <button type="submit">Create player</button>
     </form>
   )
 }
+
+export default PlayerForm

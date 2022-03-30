@@ -53,26 +53,16 @@ const TeamForm = () => {
 
   return(
     <form onSubmit={handleSubmit}>
-      <label>
-        Team name:
-        <input onChange={handleNameChange} type="text" name="name" required />
-      </label>
-      <label>
-        Location:
-        <input onChange={handleLocationChange} type="text" name="location" required />
-      </label>
-      <label>
-        Image:
-        <input onChange={handleImageChange} type="text" name="image" />
-      </label>
-      <label>
-        Primary color:
-        <input type="color" onChange={handleColorOneChange} name="colorOne" required />
-      </label>
-      <label>
-        Secondary color:
-        <input type="color" onChange={handleColorTwoChange} name="colorTwo" required />
-      </label>
+      <label>Team name: </label>
+      <input onChange={handleNameChange} type="text" name="name" required />
+      <label>Location: </label>
+      <input onChange={handleLocationChange} type="text" name="location" required />
+      <label>Image: </label>
+      <input onChange={handleImageChange} type="text" name="image" />
+      <label>Primary color: </label>
+      <input type="color" onChange={handleColorOneChange} name="colorOne" required />
+      <label>Secondary color: </label>
+      <input type="color" onChange={handleColorTwoChange} name="colorTwo" required />
       <button type="Submit">Create team</button>
     </form>
   )
