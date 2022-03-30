@@ -7,6 +7,7 @@ const PlayerDetails = () => {
   const [player, setPlayer] = useState({})
   const [team, setTeam] = useState({})
   const [ratings, setRatings] = useState({})
+  const [editing, toggleEditing] = useState(false)
 
   const { playerId } = useParams()
 
@@ -35,9 +36,43 @@ const PlayerDetails = () => {
   const handleChange = (e) => {
     let newRatings = ratings
     newRatings[e.target.name.toString()] = parseInt(e.target.value)
-    console.log(newRatings)
     setRatings(newRatings)
-    console.log(ratings)
+  }
+
+  const toNormalCasing = (string) => {
+    // Takes camel case string and makes it normal for displaying
+    if (Object.keys(ratings).length !== 0) {
+      let result = ''
+      result += string[0].toUpperCase()
+      for (let i = 1; i < string.length; i++) {
+        if (string[i].toUpperCase() === string[i]) {
+          result += ' '
+        }
+        result += string[i]
+      }
+      return result
+    } else {
+      return string
+    }
+  }
+
+  const handleSubmit = async (e) => {
+    const packagedPayLoad = {
+      name: player.name,
+      number: player.number,
+      image: player.image,
+      team: team,
+      height: player.height,
+      weight: player.weight,
+      position: player.position,
+      shortened: player.shortened,
+      ratings: ratings
+    }
+    e.preventDefault()
+    await axios
+      .put(`http://localhost:3001/api/players/${playerId}`, packagedPayLoad)
+      .catch((err) => console.log(err))
+    toggleEditing(!editing)
   }
 
   return (
@@ -56,20 +91,72 @@ const PlayerDetails = () => {
         src={player.image}
         alt={player.name}
       />
-      <form>
-        <div>
-          <label>Speed:</label>
+      <form onSubmit={handleSubmit}>
+        <div className="form-element">
+          <label>{toNormalCasing(Object.keys(ratings)[0])}: </label>
           <input
-            name="speed"
+            name={Object.keys(ratings)[0]}
             onChange={handleChange}
-            type="range"
+            type="number"
             min="1"
             max="100"
-            //value={ratings[rating.toString()]}
           />
-          {ratings.speed}
         </div>
+        <div className="form-element">
+          <label>{toNormalCasing(Object.keys(ratings)[1])}: </label>
+          <input
+            name={Object.keys(ratings)[1]}
+            onChange={handleChange}
+            type="number"
+            min="1"
+            max="100"
+          />
+        </div>
+        <div className="form-element">
+          <label>{toNormalCasing(Object.keys(ratings)[2])}: </label>
+          <input
+            name={Object.keys(ratings)[2]}
+            onChange={handleChange}
+            type="number"
+            min="1"
+            max="100"
+          />
+        </div>
+        <div className="form-element">
+          <label>{toNormalCasing(Object.keys(ratings)[2])}: </label>
+          <input
+            name={Object.keys(ratings)[2]}
+            onChange={handleChange}
+            type="number"
+            min="1"
+            max="100"
+          />
+        </div>
+        <div className="form-element">
+          <label>{toNormalCasing(Object.keys(ratings)[3])}: </label>
+          <input
+            name={Object.keys(ratings)[3]}
+            onChange={handleChange}
+            type="number"
+            min="1"
+            max="100"
+          />
+        </div>
+        <div className="form-element">
+          <label>{toNormalCasing(Object.keys(ratings)[4])}: </label>
+          <input
+            name={Object.keys(ratings)[4]}
+            onChange={handleChange}
+            type="number"
+            min="1"
+            max="100"
+          />
+        </div>
+        <button type="submit">Update</button>
       </form>
+      <button className="back" onClick={() => showTeamPage(team._id)}>
+        Back
+      </button>
     </div>
   )
 }

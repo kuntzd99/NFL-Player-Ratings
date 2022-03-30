@@ -48,9 +48,29 @@ const deletePlayer = async (req, res) => {
   }
 }
 
+const editPlayer = async (req, res) => {
+  try {
+    const player = await Player.findById(req.params.playerId)
+    player.name = req.body.name
+    player.number = req.body.number
+    player.image = req.body.image
+    player.team = req.body.team
+    player.height = req.body.height
+    player.weight = req.body.weight
+    player.position = req.body.position
+    player.shortened = req.body.shortened
+    player.ratings = req.body.ratings
+    player.save()
+    res.status(200).json({ player })
+  } catch (error) {
+    return res.status(500).send(error.message)
+  }
+}
+
 module.exports = {
   getPlayersByTeam,
   getPlayerById,
   createPlayer,
-  deletePlayer
+  deletePlayer,
+  editPlayer
 }

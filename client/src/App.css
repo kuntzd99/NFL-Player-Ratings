@@ -93,9 +93,18 @@ button {
 }
 
 .form-element {
-  padding: 10px 0;
+  padding: 9px 0;
 }
 
 input {
   margin: 0 5px;
+}
+
+img {
+  height: 100px;
+  width: 100px;
+}
+
+.back {
+  margin-top: 20px;
 }

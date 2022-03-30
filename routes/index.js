@@ -21,4 +21,6 @@ router.post('/players', playerControllers.createPlayer)
 
 router.delete('/players/:playerId', playerControllers.deletePlayer)
 
+router.put('/players/:playerId', playerControllers.editPlayer)
+
 module.exports = router
