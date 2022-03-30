@@ -4,7 +4,7 @@ import Header from './components/Header'
 import { Routes, Route } from 'react-router-dom'
 import Players from './pages/Players'
 import PlayerDetails from './pages/PlayerDetails'
-import TeamForm from './pages/TeamForm'
+import TeamForm from './components/TeamForm'
 
 function App() {
   return (

@@ -30,7 +30,27 @@ const getPlayerById = async (req, res) => {
   }
 }
 
+const createPlayer = async (req, res) => {
+  try {
+    const player = await new Player(req.body)
+    await player.save()
+    return res.status(201).json({ player })
+  } catch (error) {
+    return res.status(500).send(error.message)
+  }
+}
+
+const deletePlayer = async (req, res) => {
+  try {
+    await Player.findByIdAndDelete(req.params.playerId)
+  } catch (error) {
+    return res.status(500).send(error.message)
+  }
+}
+
 module.exports = {
   getPlayersByTeam,
-  getPlayerById
+  getPlayerById,
+  createPlayer,
+  deletePlayer
 }

@@ -48,7 +48,6 @@ const createTeam = async (req, res) => {
 const deleteTeam = async (req, res) => {
   try {
     await Team.findByIdAndDelete(req.params.teamId)
-    return res.send('deleted')
   } catch (error) {
     return res.status(500).send(error.message)
   }

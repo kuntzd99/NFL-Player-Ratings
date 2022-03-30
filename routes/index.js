@@ -17,4 +17,8 @@ router.post('/teams', teamControllers.createTeam)
 
 router.delete('/teams/:teamId', teamControllers.deleteTeam)
 
+router.post('/players', playerControllers.createPlayer)
+
+router.delete('/players/:playerId', playerControllers.deletePlayer)
+
 module.exports = router
