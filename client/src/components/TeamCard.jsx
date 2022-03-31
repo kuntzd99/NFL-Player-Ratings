@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import axios from "axios"
 
 const TeamCard = (props) => {
@@ -6,6 +6,26 @@ const TeamCard = (props) => {
   const [location, setLocation] = useState(props.location)
   const [teamName, setTeamName] = useState(props.name)
   const [deleted, toggleDeleted] = useState(false)
+  const [overall, setOverall] = useState(0)
+
+  const getOverall = async () => {
+    const response = await axios.get(
+      `http://localhost:3001/api/players/${props.id}`
+    )
+    let total = 0
+    for (let i = 0; i < response.data.players.length; i ++) {
+      let average = 0
+      for (let j = 0; j < Object.values(response.data.players[i].ratings).length; j++) {
+        average += parseInt(Object.values(response.data.players[i].ratings)[j])
+      }
+      total += average / 5
+    }
+    setOverall(total / response.data.players.length)
+  }
+
+  useEffect(() => {
+    getOverall()
+  }, [])
 
   const handleLocationChange = (e) => {
     e.preventDefault()
@@ -53,6 +73,7 @@ const TeamCard = (props) => {
             <h3>{location} {teamName}</h3>
             <img className="team-image" src={props.image} alt={teamName} />
           </div>
+          <h3>Overall: {overall}</h3>
           <div className="button-container">
             <button onClick={() => toggleEditing(!editing)}>Edit</button>
             <button onClick={deleteTeam}>Delete</button>
