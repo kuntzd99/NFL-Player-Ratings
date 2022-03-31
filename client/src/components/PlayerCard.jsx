@@ -12,7 +12,6 @@ const PlayerCard = (props) => {
   }
 
   useEffect(() => {
-    console.log(props.ratings)
     getOverall()
   }, [])
 

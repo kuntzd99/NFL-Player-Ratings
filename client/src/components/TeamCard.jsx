@@ -12,6 +12,9 @@ const TeamCard = (props) => {
     const response = await axios.get(
       `http://localhost:3001/api/players/${props.id}`
     )
+    if (response.data.players.length === 0) {
+      return 0  
+    }
     let total = 0
     for (let i = 0; i < response.data.players.length; i ++) {
       let average = 0
