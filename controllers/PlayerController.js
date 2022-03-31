@@ -12,7 +12,7 @@ const getPlayersByTeam = async (req, res) => {
     if (players) {
       return res.status(200).json({ players })
     }
-    return res.status(404).send('Reviews for this ride do not exist')
+    return res.status(404).send('Players for this team do not exist')
   } catch (error) {
     return res.status(500).send(error.message)
   }

@@ -8,6 +8,10 @@ const PlayerDetails = () => {
   const [team, setTeam] = useState({})
   const [ratings, setRatings] = useState({})
   const [editing, toggleEditing] = useState(false)
+  const [comments, setComments] = useState([])
+  const [addingComment, toggleAddingComment] = useState(false)
+  const [username, setUsername] = useState('')
+  const [comment, setComment] = useState('')
 
   const { playerId } = useParams()
 
@@ -23,8 +27,16 @@ const PlayerDetails = () => {
     setTeam(team.data.team)
   }
 
+  const getComments = async () => {
+    const response = await axios.get(
+      `http://localhost:3001/api/comments/${playerId}`
+    )
+    setComments(response.data.comments)
+  }
+
   useEffect(() => {
     getPlayerAndTeam()
+    getComments()
   }, [])
 
   let navigate = useNavigate()
@@ -37,6 +49,16 @@ const PlayerDetails = () => {
     let newRatings = ratings
     newRatings[e.target.name.toString()] = parseInt(e.target.value)
     setRatings(newRatings)
+  }
+
+  const handleUsernameChange = (e) => {
+    e.preventDefault()
+    setUsername(e.target.value)
+  }
+
+  const handleCommentChange = (e) => {
+    e.preventDefault()
+    setComment(e.target.value)
   }
 
   const toNormalCasing = (string) => {
@@ -73,6 +95,20 @@ const PlayerDetails = () => {
       .put(`http://localhost:3001/api/players/${playerId}`, packagedPayLoad)
       .catch((err) => console.log(err))
     toggleEditing(!editing)
+  }
+
+  const handleCommentSubmit = async (e) => {
+    const packagedPayLoad = {
+      username: username,
+      comment: comment,
+      player: playerId
+    }
+    e.preventDefault()
+    axios
+      .post(`http://localhost:3001/api/comments`, packagedPayLoad)
+      .catch((err) => console.log(err))
+    toggleAddingComment(false)
+    window.location.reload()
   }
 
   return (
@@ -178,9 +214,36 @@ const PlayerDetails = () => {
           <button onClick={() => toggleEditing(true)}>Edit</button>
         </div>
       )}
-      <button className="back" onClick={() => showTeamPage(team._id)}>
-        Back
-      </button>
+      <h3>
+        Comments
+        <button onClick={() => toggleAddingComment(true)}>Add Comment</button>
+      </h3>
+      <div className="comment-container">
+        {comments.map((comment) => (
+          <div className="comment" key={comment._id}>
+            <p>
+              {comment.username}: {comment.comment}
+            </p>
+          </div>
+        ))}
+      </div>
+      {addingComment ? (
+        <div>
+          <form onSubmit={handleCommentSubmit}>
+            <input onChange={handleUsernameChange} placeholder="username" />
+            <input
+              onChange={handleCommentChange}
+              placeholder="Leave a comment"
+            />
+            <div className="button-container">
+              <button onClick={() => toggleAddingComment(false)}>Cancel</button>
+              <button type="submit">Post Comment</button>
+            </div>
+          </form>
+        </div>
+      ) : (
+        <div></div>
+      )}
     </div>
   )
 }
