@@ -193,6 +193,122 @@ const PlayerForm = () => {
           </div>
         </div>)
         break 
+      case "RB":
+        setPosition('Runningback')
+        setRatingsModel(
+        <div>
+          <div className="form-element">
+            <label>Speed: </label>
+            <input
+              onChange={handleRatingChange}
+              name="speed"
+              type="number"
+              min="1"
+              max="100"
+              required
+            />
+          </div>
+          <div className="form=element">
+            <label>Juke Move: </label>
+            <input
+              onChange={handleRatingChange}
+              name="jukeMove"
+              type="number"
+              min="1"
+              max="100"
+              required
+            />
+          </div>
+          <div className="form-element">
+            <label>Vision: </label>
+            <input
+              onChange={handleRatingChange}
+              name="vision"
+              type="number"
+              min="1"
+              max="100"
+            />
+          </div>
+          <div className="form-element">
+            <label>Truck: </label>
+            <input
+              onChange={handleRatingChange}
+              name="truck"
+              type="number"
+              min="1"
+              max="100"
+            />
+          </div>
+          <div className="form-element">
+            <label>Carry: </label>
+            <input
+              onChange={handleRatingChange}
+              name="carry"
+              type="number"
+              min="1"
+              max="100"
+            />
+          </div>
+        </div>)
+        break
+      case "LB":
+        setPosition('Linebacker')
+        setRatingsModel(
+        <div>
+          <div className="form-element">
+            <label>Speed: </label>
+            <input
+              onChange={handleRatingChange}
+              name="speed"
+              type="number"
+              min="1"
+              max="100"
+              required
+            />
+          </div>
+          <div className="form=element">
+            <label>Hit Power: </label>
+            <input
+              onChange={handleRatingChange}
+              name="hitPower"
+              type="number"
+              min="1"
+              max="100"
+              required
+            />
+          </div>
+          <div className="form-element">
+            <label>Play Recognition: </label>
+            <input
+              onChange={handleRatingChange}
+              name="playRecognition"
+              type="number"
+              min="1"
+              max="100"
+            />
+          </div>
+          <div className="form-element">
+            <label>Tackling: </label>
+            <input
+              onChange={handleRatingChange}
+              name="tackling"
+              type="number"
+              min="1"
+              max="100"
+            />
+          </div>
+          <div className="form-element">
+            <label>Pass Rush: </label>
+            <input
+              onChange={handleRatingChange}
+              name="passRush"
+              type="number"
+              min="1"
+              max="100"
+            />
+          </div>
+        </div>)
+        break
     }
   }
 
