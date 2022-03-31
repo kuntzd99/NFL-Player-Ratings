@@ -44,6 +44,7 @@ const Players = () => {
               number={player.number}
               image={player.image}
               shortened={player.shortened}
+              ratings={player.ratings}
               onClick={() => showPlayerDetails(player._id)}
             />
           </div>

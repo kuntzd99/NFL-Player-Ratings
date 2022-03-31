@@ -12,6 +12,7 @@ const PlayerDetails = () => {
   const [addingComment, toggleAddingComment] = useState(false)
   const [username, setUsername] = useState('')
   const [comment, setComment] = useState('')
+  const [overall, setOverall] = useState(0)
 
   const { playerId } = useParams()
 
@@ -21,6 +22,15 @@ const PlayerDetails = () => {
     )
     setPlayer(response.data.player)
     setRatings(response.data.player.ratings)
+    let total = 0
+    for (
+      let i = 0;
+      i < Object.values(response.data.player.ratings).length;
+      i++
+    ) {
+      total += parseInt(Object.values(response.data.player.ratings)[i])
+    }
+    setOverall(total / 5)
     const team = await axios.get(
       `http://localhost:3001/api/teams/${response.data.player.team[0]}`
     )
@@ -40,10 +50,6 @@ const PlayerDetails = () => {
   }, [])
 
   let navigate = useNavigate()
-
-  const showTeamPage = (teamId) => {
-    navigate(`/players/${teamId}`)
-  }
 
   const handleChange = (e) => {
     let newRatings = ratings
@@ -95,6 +101,7 @@ const PlayerDetails = () => {
       .put(`http://localhost:3001/api/players/${playerId}`, packagedPayLoad)
       .catch((err) => console.log(err))
     toggleEditing(!editing)
+    window.location.reload()
   }
 
   const handleCommentSubmit = async (e) => {
@@ -104,11 +111,16 @@ const PlayerDetails = () => {
       player: playerId
     }
     e.preventDefault()
-    axios
+    await axios
       .post(`http://localhost:3001/api/comments`, packagedPayLoad)
       .catch((err) => console.log(err))
     toggleAddingComment(false)
     window.location.reload()
+  }
+
+  const deletePlayer = async () => {
+    navigate(`/players/${team._id}`)
+    await axios.delete(`http://localhost:3001/api/players/${playerId}`)
   }
 
   return (
@@ -211,7 +223,11 @@ const PlayerDetails = () => {
             <input type="range" value={Object.values(ratings)[4]} />{' '}
             {Object.values(ratings)[4]}
           </div>
-          <button onClick={() => toggleEditing(true)}>Edit</button>
+          <h3>Overall: {overall}</h3>
+          <div className="button-container">
+            <button onClick={() => toggleEditing(true)}>Edit</button>
+            <button onClick={deletePlayer}>Delete</button>
+          </div>
         </div>
       )}
       <h3>

@@ -357,12 +357,12 @@ const PlayerForm = () => {
       </div>
       <div className="form-element">
         <label>Height: </label>
-        <input onChange={handleHeightFeetChange} type="number" name="heightFeet" required />'
+        <input onChange={handleHeightFeetChange} type="number" min="0" name="heightFeet" required />'
         <input onChange={handleHeightInchesChange} type="number" min="0" max="11" name="heightIches" required /> "
       </div>
       <div className="form-element">
         <label>Weight: </label>
-        <input onChange={handleWeightChange} type="number" name="weight" required />lbs
+        <input onChange={handleWeightChange} type="number" min="1" name="weight" required />lbs
       </div>
       <div className="form-element">
         <label>Position:</label>
