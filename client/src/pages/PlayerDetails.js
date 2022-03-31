@@ -91,69 +91,93 @@ const PlayerDetails = () => {
         src={player.image}
         alt={player.name}
       />
-      <form onSubmit={handleSubmit}>
-        <div className="form-element">
-          <label>{toNormalCasing(Object.keys(ratings)[0])}: </label>
-          <input
-            name={Object.keys(ratings)[0]}
-            onChange={handleChange}
-            type="number"
-            min="1"
-            max="100"
-          />
+      {editing ? (
+        <form onSubmit={handleSubmit}>
+          <div className="form-element">
+            <label>{toNormalCasing(Object.keys(ratings)[0])}: </label>
+            <input
+              name={Object.keys(ratings)[0]}
+              onChange={handleChange}
+              type="number"
+              min="1"
+              max="100"
+            />
+          </div>
+          <div className="form-element">
+            <label>{toNormalCasing(Object.keys(ratings)[1])}: </label>
+            <input
+              name={Object.keys(ratings)[1]}
+              onChange={handleChange}
+              type="number"
+              min="1"
+              max="100"
+            />
+          </div>
+          <div className="form-element">
+            <label>{toNormalCasing(Object.keys(ratings)[2])}: </label>
+            <input
+              name={Object.keys(ratings)[2]}
+              onChange={handleChange}
+              type="number"
+              min="1"
+              max="100"
+            />
+          </div>
+          <div className="form-element">
+            <label>{toNormalCasing(Object.keys(ratings)[3])}: </label>
+            <input
+              name={Object.keys(ratings)[3]}
+              onChange={handleChange}
+              type="number"
+              min="1"
+              max="100"
+            />
+          </div>
+          <div className="form-element">
+            <label>{toNormalCasing(Object.keys(ratings)[4])}: </label>
+            <input
+              name={Object.keys(ratings)[4]}
+              onChange={handleChange}
+              type="number"
+              min="1"
+              max="100"
+            />
+          </div>
+          <div>
+            <button onClick={() => toggleEditing(false)}>Cancel</button>
+            <button type="submit">Update</button>
+          </div>
+        </form>
+      ) : (
+        <div>
+          <div className="form-element">
+            <label>{toNormalCasing(Object.keys(ratings)[0])}:</label>
+            <input type="range" value={Object.values(ratings)[0]} />{' '}
+            {Object.values(ratings)[0]}
+          </div>
+          <div className="form-element">
+            <label>{toNormalCasing(Object.keys(ratings)[1])}:</label>
+            <input type="range" value={Object.values(ratings)[1]} />{' '}
+            {Object.values(ratings)[1]}
+          </div>
+          <div className="form-element">
+            <label>{toNormalCasing(Object.keys(ratings)[2])}:</label>
+            <input type="range" value={Object.values(ratings)[2]} />{' '}
+            {Object.values(ratings)[2]}
+          </div>
+          <div className="form-element">
+            <label>{toNormalCasing(Object.keys(ratings)[3])}:</label>
+            <input type="range" value={Object.values(ratings)[3]} />{' '}
+            {Object.values(ratings)[3]}
+          </div>
+          <div className="form-element">
+            <label>{toNormalCasing(Object.keys(ratings)[4])}:</label>
+            <input type="range" value={Object.values(ratings)[4]} />{' '}
+            {Object.values(ratings)[4]}
+          </div>
+          <button onClick={() => toggleEditing(true)}>Edit</button>
         </div>
-        <div className="form-element">
-          <label>{toNormalCasing(Object.keys(ratings)[1])}: </label>
-          <input
-            name={Object.keys(ratings)[1]}
-            onChange={handleChange}
-            type="number"
-            min="1"
-            max="100"
-          />
-        </div>
-        <div className="form-element">
-          <label>{toNormalCasing(Object.keys(ratings)[2])}: </label>
-          <input
-            name={Object.keys(ratings)[2]}
-            onChange={handleChange}
-            type="number"
-            min="1"
-            max="100"
-          />
-        </div>
-        <div className="form-element">
-          <label>{toNormalCasing(Object.keys(ratings)[2])}: </label>
-          <input
-            name={Object.keys(ratings)[2]}
-            onChange={handleChange}
-            type="number"
-            min="1"
-            max="100"
-          />
-        </div>
-        <div className="form-element">
-          <label>{toNormalCasing(Object.keys(ratings)[3])}: </label>
-          <input
-            name={Object.keys(ratings)[3]}
-            onChange={handleChange}
-            type="number"
-            min="1"
-            max="100"
-          />
-        </div>
-        <div className="form-element">
-          <label>{toNormalCasing(Object.keys(ratings)[4])}: </label>
-          <input
-            name={Object.keys(ratings)[4]}
-            onChange={handleChange}
-            type="number"
-            min="1"
-            max="100"
-          />
-        </div>
-        <button type="submit">Update</button>
-      </form>
+      )}
       <button className="back" onClick={() => showTeamPage(team._id)}>
         Back
       </button>

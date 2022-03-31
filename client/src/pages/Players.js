@@ -31,7 +31,9 @@ const Players = () => {
       <div className="teams-header">
         <h1>Players</h1>
         <div className="player-card">
-          <h3>Add player</h3>
+          <button onClick={() => navigate(`/players/create/${team[0].teamId}`)}>
+            Add Player
+          </button>
         </div>
       </div>
       <div className="players-container">

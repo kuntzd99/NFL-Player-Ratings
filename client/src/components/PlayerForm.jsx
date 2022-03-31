@@ -14,13 +14,26 @@ const PlayerForm = () => {
   const [shortened, setShortened] = useState('')
   const [ratingsModel, setRatingsModel] = useState('')
   const [ratings, setRatings] = useState ({})
+  const [teamName, setTeamName] = useState('')
 
   const { teamId } = useParams()
+
+  const getTeamName = async () => {
+    console.log(teamId)
+    const response = await axios.get(
+      `http://localhost:3001/api/teams/${teamId}`
+    )
+    setTeamName(response.data.team.name)
+  }
 
   useEffect(() => {
     setTeam(teamId)
     getRatingsModel()
   }, [shortened])
+
+  useEffect(() => {
+    getTeamName()
+  })
 
   const handleNameChange = (e) => {
     e.preventDefault()
@@ -211,6 +224,8 @@ const PlayerForm = () => {
   }
 
   return(
+    <div>
+      <h2>Create Player for {teamName}</h2>
     <form className="player-form" onSubmit={handleOnSubmit}>
       <div className="form-element">
         <label>Name: </label>
@@ -252,6 +267,7 @@ const PlayerForm = () => {
       </div>
       <button type="submit">Create player</button>
     </form>
+    </div>
   )
 }
 
