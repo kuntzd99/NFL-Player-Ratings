@@ -125,7 +125,7 @@ img {
 }
 
 body {
-  background-color: rgb(250, 170, 156);
+  background-color: darksalmon;
 }
 
 .team-form {
@@ -150,4 +150,10 @@ button {
 
 h3 {
   text-align: center;
+}
+
+.player-details-image {
+  border-style: solid;
+  border-width: 5px;
+  border-radius: 10%;
 }

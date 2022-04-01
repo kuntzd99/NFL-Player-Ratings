@@ -13,6 +13,7 @@ const PlayerDetails = () => {
   const [username, setUsername] = useState('')
   const [comment, setComment] = useState('')
   const [overall, setOverall] = useState(0)
+  const [teamColors, setTeamColors] = useState([])
 
   const { playerId } = useParams()
 
@@ -35,6 +36,7 @@ const PlayerDetails = () => {
       `http://localhost:3001/api/teams/${response.data.player.team[0]}`
     )
     setTeam(team.data.team)
+    setTeamColors(team.data.team.teamColors)
   }
 
   const getComments = async () => {
@@ -82,6 +84,11 @@ const PlayerDetails = () => {
     } else {
       return string
     }
+  }
+
+  const myStyle = {
+    borderColor: teamColors[0],
+    background: teamColors[1]
   }
 
   const handleSubmit = async (e) => {
@@ -136,6 +143,7 @@ const PlayerDetails = () => {
       </p>
       <img
         className="player-details-image"
+        style={myStyle}
         src={player.image}
         alt={player.name}
       />
@@ -192,15 +200,26 @@ const PlayerDetails = () => {
             />
           </div>
           <div>
-            <button onClick={() => toggleEditing(false)}>Cancel</button>
-            <button type="submit">Update</button>
+            <button
+              style={{ borderColor: teamColors[0] }}
+              onClick={() => toggleEditing(false)}
+            >
+              Cancel
+            </button>
+            <button style={{ borderColor: teamColors[0] }} type="submit">
+              Update
+            </button>
           </div>
         </form>
       ) : (
         <div>
           <div className="form-element">
             <label>{toNormalCasing(Object.keys(ratings)[0])}:</label>
-            <input type="range" value={Object.values(ratings)[0]} />{' '}
+            <input
+              style={myStyle}
+              type="range"
+              value={Object.values(ratings)[0]}
+            />{' '}
             {Object.values(ratings)[0]}
           </div>
           <div className="form-element">
@@ -225,18 +244,37 @@ const PlayerDetails = () => {
           </div>
           <h3>Overall: {overall}</h3>
           <div className="button-container">
-            <button onClick={() => toggleEditing(true)}>Edit</button>
-            <button onClick={deletePlayer}>Delete</button>
+            <button
+              style={{ borderColor: teamColors[0] }}
+              onClick={() => toggleEditing(true)}
+            >
+              Edit
+            </button>
+            <button
+              style={{ borderColor: teamColors[0] }}
+              onClick={deletePlayer}
+            >
+              Delete
+            </button>
           </div>
         </div>
       )}
       <h3>
         Comments
-        <button onClick={() => toggleAddingComment(true)}>Add Comment</button>
+        <button
+          style={{ borderColor: teamColors[0] }}
+          onClick={() => toggleAddingComment(true)}
+        >
+          Add Comment
+        </button>
       </h3>
       <div className="comment-container">
         {comments.map((comment) => (
-          <div className="comment" key={comment._id}>
+          <div
+            style={{ borderColor: teamColors[0] }}
+            className="comment"
+            key={comment._id}
+          >
             <p>
               {comment.username}: {comment.comment}
             </p>
@@ -252,8 +290,15 @@ const PlayerDetails = () => {
               placeholder="Leave a comment"
             />
             <div className="button-container">
-              <button onClick={() => toggleAddingComment(false)}>Cancel</button>
-              <button type="submit">Post Comment</button>
+              <button
+                style={{ borderColor: teamColors[0] }}
+                onClick={() => toggleAddingComment(false)}
+              >
+                Cancel
+              </button>
+              <button style={{ borderColor: teamColors[0] }} type="submit">
+                Post Comment
+              </button>
             </div>
           </form>
         </div>
