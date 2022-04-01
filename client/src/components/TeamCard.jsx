@@ -48,12 +48,12 @@ const TeamCard = (props) => {
       teamColors: props.teamColors
     }
     e.preventDefault()
-    await axios.put(`http://localhost:3001/api/teams/${props.id}`, packagedPayLoad).catch((err) => console.log(err))
+    await axios.put(`/api/teams/${props.id}`, packagedPayLoad).catch((err) => console.log(err))
     toggleEditing(!editing)
   }
 
   const deleteTeam = async () => {
-    await axios.delete(`http://localhost:3001/api/teams/${props.id}`)
+    await axios.delete(`/api/teams/${props.id}`)
     toggleDeleted(!deleted)
   }
 

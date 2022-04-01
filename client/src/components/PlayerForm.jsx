@@ -21,7 +21,7 @@ const PlayerForm = () => {
 
   const getTeamName = async () => {
     const response = await axios.get(
-      `http://localhost:3001/api/teams/${teamId}`
+      `/api/teams/${teamId}`
     )
     setTeamName(response.data.team.name)
     setTeamColors(response.data.team.teamColors)
@@ -336,7 +336,7 @@ const PlayerForm = () => {
       packagedPayLoad.image = 'https://upload.wikimedia.org/wikipedia/en/thumb/a/a2/National_Football_League_logo.svg/1200px-National_Football_League_logo.svg.png'
     }
     e.preventDefault()
-    axios.post(`http://localhost:3001/api/players/`, packagedPayLoad).catch((err) => console.log(err))
+    axios.post(`/api/players/`, packagedPayLoad).catch((err) => console.log(err))
     navigate(`/players/${team}`)
   }
 

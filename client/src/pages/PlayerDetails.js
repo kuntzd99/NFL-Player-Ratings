@@ -18,9 +18,7 @@ const PlayerDetails = () => {
   const { playerId } = useParams()
 
   const getPlayerAndTeam = async () => {
-    const response = await axios.get(
-      `http://localhost:3001/api/details/${playerId}`
-    )
+    const response = await axios.get(`/api/details/${playerId}`)
     setPlayer(response.data.player)
     setRatings(response.data.player.ratings)
     let total = 0
@@ -32,17 +30,13 @@ const PlayerDetails = () => {
       total += parseInt(Object.values(response.data.player.ratings)[i])
     }
     setOverall(total / 5)
-    const team = await axios.get(
-      `http://localhost:3001/api/teams/${response.data.player.team[0]}`
-    )
+    const team = await axios.get(`/api/teams/${response.data.player.team[0]}`)
     setTeam(team.data.team)
     setTeamColors(team.data.team.teamColors)
   }
 
   const getComments = async () => {
-    const response = await axios.get(
-      `http://localhost:3001/api/comments/${playerId}`
-    )
+    const response = await axios.get(`/api/comments/${playerId}`)
     setComments(response.data.comments)
   }
 
@@ -105,7 +99,7 @@ const PlayerDetails = () => {
     }
     e.preventDefault()
     await axios
-      .put(`http://localhost:3001/api/players/${playerId}`, packagedPayLoad)
+      .put(`/api/players/${playerId}`, packagedPayLoad)
       .catch((err) => console.log(err))
     toggleEditing(!editing)
     window.location.reload()
@@ -119,7 +113,7 @@ const PlayerDetails = () => {
     }
     e.preventDefault()
     await axios
-      .post(`http://localhost:3001/api/comments`, packagedPayLoad)
+      .post(`/api/comments`, packagedPayLoad)
       .catch((err) => console.log(err))
     toggleAddingComment(false)
     window.location.reload()
@@ -127,7 +121,7 @@ const PlayerDetails = () => {
 
   const deletePlayer = async () => {
     navigate(`/players/${team._id}`)
-    await axios.delete(`http://localhost:3001/api/players/${playerId}`)
+    await axios.delete(`/api/players/${playerId}`)
   }
 
   return (

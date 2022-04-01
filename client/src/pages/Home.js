@@ -27,7 +27,6 @@ const Home = () => {
       const sortedPlayer = await axios.get(`/api/details/${sortable[i][0]}`)
       sortedPlayers.push(sortedPlayer.data.player)
     }
-    console.log(sortedPlayers)
     setPlayers(sortedPlayers)
   }
 
