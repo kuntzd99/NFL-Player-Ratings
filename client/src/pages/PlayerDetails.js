@@ -49,7 +49,7 @@ const PlayerDetails = () => {
   useEffect(() => {
     getPlayerAndTeam()
     getComments()
-  }, [])
+  }, [username, comment])
 
   let navigate = useNavigate()
 
@@ -214,7 +214,7 @@ const PlayerDetails = () => {
       ) : (
         <div>
           <div className="form-element">
-            <label>{toNormalCasing(Object.keys(ratings)[0])}:</label>
+            <label>{toNormalCasing(Object.keys(ratings)[0])}: </label>
             <input
               style={myStyle}
               type="range"
@@ -223,26 +223,29 @@ const PlayerDetails = () => {
             {Object.values(ratings)[0]}
           </div>
           <div className="form-element">
-            <label>{toNormalCasing(Object.keys(ratings)[1])}:</label>
+            <label>{toNormalCasing(Object.keys(ratings)[1])}: </label>
             <input type="range" value={Object.values(ratings)[1]} />{' '}
             {Object.values(ratings)[1]}
           </div>
           <div className="form-element">
-            <label>{toNormalCasing(Object.keys(ratings)[2])}:</label>
+            <label>{toNormalCasing(Object.keys(ratings)[2])}: </label>
             <input type="range" value={Object.values(ratings)[2]} />{' '}
             {Object.values(ratings)[2]}
           </div>
           <div className="form-element">
-            <label>{toNormalCasing(Object.keys(ratings)[3])}:</label>
+            <label>{toNormalCasing(Object.keys(ratings)[3])}: </label>
             <input type="range" value={Object.values(ratings)[3]} />{' '}
             {Object.values(ratings)[3]}
           </div>
           <div className="form-element">
-            <label>{toNormalCasing(Object.keys(ratings)[4])}:</label>
+            <label>{toNormalCasing(Object.keys(ratings)[4])}: </label>
             <input type="range" value={Object.values(ratings)[4]} />{' '}
             {Object.values(ratings)[4]}
           </div>
-          <h3>Overall: {overall}</h3>
+          <div className="form-element">
+            <label>Overall: </label>
+            <input type="range" value={overall} /> {overall}
+          </div>
           <div className="button-container">
             <button
               style={{ borderColor: teamColors[0] }}

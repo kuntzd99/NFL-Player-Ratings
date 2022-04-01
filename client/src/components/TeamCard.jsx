@@ -80,7 +80,8 @@ const TeamCard = (props) => {
       <div>
         <div className="team-card" style={{borderColor: props.teamColors[0]}}>
           <div onClick={props.onClick}>
-            <h3>{location} {teamName}</h3>
+            <h3>{location}</h3>
+            <h3>{teamName}</h3>
             <img className="team-image" src={props.image} alt={teamName} />
           </div>
           <h3>Overall: {overall}</h3>

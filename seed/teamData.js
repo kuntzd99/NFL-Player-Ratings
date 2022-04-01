@@ -57,7 +57,7 @@ const main = async () => {
       name: 'Seahawks',
       location: 'Seattle',
       image: 'https://a.espncdn.com/i/teamlogos/nfl/500/sea.png',
-      teamColors: ['navy', 'lime']
+      teamColors: ['lime', 'navy']
     },
 
     {
@@ -211,7 +211,7 @@ const main = async () => {
       name: 'Eagles',
       location: 'Philadelphia',
       image: 'https://a.espncdn.com/i/teamlogos/nfl/500/phi.png',
-      teamColors: ['white', 'darkgreen']
+      teamColors: ['darkgreen', 'white']
     },
 
     {

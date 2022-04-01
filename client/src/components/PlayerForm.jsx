@@ -15,6 +15,7 @@ const PlayerForm = () => {
   const [ratingsModel, setRatingsModel] = useState('')
   const [ratings, setRatings] = useState ({})
   const [teamName, setTeamName] = useState('')
+  const [teamColors, setTeamColors] = useState([])
 
   const { teamId } = useParams()
 
@@ -23,6 +24,7 @@ const PlayerForm = () => {
       `http://localhost:3001/api/teams/${teamId}`
     )
     setTeamName(response.data.team.name)
+    setTeamColors(response.data.team.teamColors)
   }
 
   useEffect(() => {
@@ -341,6 +343,7 @@ const PlayerForm = () => {
   return(
     <div className="player-form">
       <h2>Create Player for {teamName}</h2>
+      <p>If you leave the image input blank, a default NFL image will be used.</p>
     <form className="player-form" onSubmit={handleOnSubmit}>
       <div className="form-element">
         <label>Name: </label>
@@ -380,7 +383,7 @@ const PlayerForm = () => {
       <div className="form-element">
         {ratingsModel}
       </div>
-      <button type="submit">Create player</button>
+      <button style={{ borderColor: teamColors[0] }} type="submit">Create player</button>
     </form>
     </div>
   )

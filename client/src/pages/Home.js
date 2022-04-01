@@ -56,7 +56,12 @@ const Home = () => {
 
   return (
     <div className="home">
-      <h3>Best Players</h3>
+      <h1>Rate and Comment on NFL players</h1>
+      <p>
+        Click on teams to view/create NFL teams. Click on a team to view its
+        players, and click on a player to view ratings and comments.
+      </p>
+      <h3>Highest-Rated Players:</h3>
       <div className="players-container">
         {players.map((player) => (
           <div key={player._id}>

@@ -54,6 +54,7 @@ const TeamForm = () => {
   return(
     <div>
       <h3>Create a Team</h3>
+      <p>If you leave the image input blank, a default NFL image will be used.</p>
     <form onSubmit={handleSubmit} className="player-form">
       <div className="form-element">
         <label>Team name: </label>
