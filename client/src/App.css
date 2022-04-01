@@ -157,3 +157,9 @@ h3 {
   border-width: 5px;
   border-radius: 10%;
 }
+
+.comment {
+  border-style: solid;
+  background-color: blanchedalmond;
+  margin: 10px 50px;
+}
