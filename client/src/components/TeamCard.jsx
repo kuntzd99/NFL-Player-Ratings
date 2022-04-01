@@ -70,7 +70,7 @@ const TeamCard = (props) => {
           <input onChange={handleLocationChange} type="text" placeholder="Location" />
           <input onChange={handleNameChange} type="text" placeholder="Team Name" />
           <img className="team-image" src={props.image} alt={props.name} />
-          <div>
+          <div className="button-container">
             <button onClick={() => toggleEditing(false)}>Cancel</button>
             <button type="submit" style={{borderColor: props.teamColors[0]}}>Submit</button>
           </div>
