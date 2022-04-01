@@ -7,7 +7,7 @@ const Home = () => {
   const [players, setPlayers] = useState([])
 
   const getPlayers = async () => {
-    const response = await axios.get(`http://localhost:3001/api/players`)
+    const response = await axios.get(`/api/players`)
     let overalls = {}
     for (let i = 0; i < response.data.players.length; i++) {
       overalls[response.data.players[i]._id] = getOverall(
@@ -24,9 +24,7 @@ const Home = () => {
     sortable.reverse()
     const sortedPlayers = []
     for (let i = 0; i < sortable.length; i++) {
-      const sortedPlayer = await axios.get(
-        `http://localhost:3001/api/details/${sortable[i][0]}`
-      )
+      const sortedPlayer = await axios.get(`/api/details/${sortable[i][0]}`)
       sortedPlayers.push(sortedPlayer.data.player)
     }
     console.log(sortedPlayers)
