@@ -276,7 +276,8 @@ const PlayerDetails = () => {
             key={comment._id}
           >
             <p>
-              {comment.username}: {comment.comment}
+              <span className="username">{comment.username}</span>:{' '}
+              {comment.comment}
             </p>
           </div>
         ))}

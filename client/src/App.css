@@ -156,10 +156,16 @@ h3 {
   border-style: solid;
   border-width: 5px;
   border-radius: 10%;
+  height: 350px;
+  width: 350px;
 }
 
 .comment {
   border-style: solid;
   background-color: blanchedalmond;
   margin: 10px 50px;
+}
+
+.username {
+  font-weight: bold;
 }
