@@ -5,7 +5,7 @@ const TeamCard = (props) => {
   const [editing, toggleEditing] = useState(false)
   const [location, setLocation] = useState(props.location)
   const [teamName, setTeamName] = useState(props.name)
-  const [deleted, toggleDeleted] = useState(false)
+  //const [deleted, toggleDeleted] = useState(false)
   const [overall, setOverall] = useState(0)
 
   const getOverall = async () => {
@@ -28,7 +28,7 @@ const TeamCard = (props) => {
 
   useEffect(() => {
     getOverall()
-  }, [deleted])
+  }, [props.deleted])
 
   const handleLocationChange = (e) => {
     e.preventDefault()
@@ -52,18 +52,13 @@ const TeamCard = (props) => {
     toggleEditing(!editing)
   }
 
-  const deleteTeam = async () => {
-    await axios.delete(`/api/teams/${props.id}`)
-    toggleDeleted(!deleted)
-  }
-
   const myStyle = {
     borderColor: props.teamColors[0],
   }
 
   return(
     <div>
-      {deleted ?
+      {props.deleted ?
       <div>
         Deleted
       </div> :
@@ -90,7 +85,7 @@ const TeamCard = (props) => {
           <h3>Overall: {overall}</h3>
           <div className="button-container">
             <button style={{borderColor: props.teamColors[0]}} onClick={() => toggleEditing(!editing)}>Edit</button>
-            <button style={{borderColor: props.teamColors[0]}} onClick={deleteTeam}>Delete</button>
+            <button style={{borderColor: props.teamColors[0]}} onClick={props.deleteTeam}>Delete</button>
           </div>
         </div>
       </div>

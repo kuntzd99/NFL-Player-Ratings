@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom'
 
 const Teams = () => {
   const [teams, setTeams] = useState([])
+  const [deleted, toggleDeleted] = useState(false)
 
   const getTeams = async () => {
     const response = await axios.get('/api/teams')
@@ -57,8 +58,15 @@ const Teams = () => {
     navigate(`/players/${teamId}`)
   }
 
+  const deleteTeam = async (teamId) => {
+    await axios.delete(`/api/teams/${teamId}`)
+    toggleDeleted(!deleted)
+    window.location.reload()
+  }
+
   return (
     <div>
+      <p>Give this page a second to load</p>
       <div className="teams-header">
         <h1>Teams</h1>
       </div>
@@ -71,6 +79,8 @@ const Teams = () => {
               image={team.image}
               teamColors={team.teamColors}
               id={team._id}
+              deleted={deleted}
+              deleteTeam={() => deleteTeam(team._id)}
               onClick={() => showPlayers(team._id)}
             />
           </div>
