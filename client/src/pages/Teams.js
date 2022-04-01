@@ -66,7 +66,8 @@ const Teams = () => {
 
   return (
     <div>
-      <p>Give this page a second to load</p>
+      <p>Give this page a second to load.</p>
+      <p>After deleting a team, you must reload the page to see it gone.</p>
       <div className="teams-header">
         <h1>Teams</h1>
       </div>
