@@ -7,11 +7,11 @@ const Teams = () => {
   const [teams, setTeams] = useState([])
 
   const getTeams = async () => {
-    const response = await axios.get('http://localhost:3001/api/teams')
+    const response = await axios.get('/api/teams')
     let overalls = {}
     for (let i = 0; i < response.data.teams.length; i++) {
       const player = await axios.get(
-        `http://localhost:3001/api/players/${response.data.teams[i]._id}`
+        `/api/players/${response.data.teams[i]._id}`
       )
       overalls[response.data.teams[i]._id] = getOverall(player.data.players)
     }
@@ -26,9 +26,7 @@ const Teams = () => {
     sortable.reverse()
     const sortedTeams = []
     for (let i = 0; i < sortable.length; i++) {
-      const sortedTeam = await axios.get(
-        `http://localhost:3001/api/teams/${sortable[i][0]}`
-      )
+      const sortedTeam = await axios.get(`/api/teams/${sortable[i][0]}`)
       sortedTeams.push(sortedTeam.data.team)
     }
     setTeams(sortedTeams)

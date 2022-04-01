@@ -10,7 +10,7 @@ const TeamCard = (props) => {
 
   const getOverall = async () => {
     const response = await axios.get(
-      `http://localhost:3001/api/players/${props.id}`
+      `/api/players/${props.id}`
     )
     if (response.data.players.length === 0) {
       return 0  
@@ -28,7 +28,7 @@ const TeamCard = (props) => {
 
   useEffect(() => {
     getOverall()
-  }, [])
+  }, [deleted])
 
   const handleLocationChange = (e) => {
     e.preventDefault()
@@ -54,7 +54,7 @@ const TeamCard = (props) => {
 
   const deleteTeam = async () => {
     await axios.delete(`http://localhost:3001/api/teams/${props.id}`)
-    toggleDeleted(true)
+    toggleDeleted(!deleted)
   }
 
   const myStyle = {
@@ -63,7 +63,10 @@ const TeamCard = (props) => {
 
   return(
     <div>
-      {deleted ? <div></div> :
+      {deleted ?
+      <div>
+        Deleted
+      </div> :
       editing ? 
       <div className="team-card" style={{borderColor: props.teamColors[0]}}>
         <form onSubmit={handleOnSubmit}>

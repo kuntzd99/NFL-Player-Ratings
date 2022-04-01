@@ -15,7 +15,7 @@ const PlayerCard = (props) => {
 
   const getTeamColors = async () => {
     const response = await axios.get(
-      `http://localhost:3001/api/teams/${props.team}`
+      `/api/teams/${props.team}`
     )
     setTeamColors(response.data.team.teamColors)
   }
