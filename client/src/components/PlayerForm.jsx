@@ -19,7 +19,6 @@ const PlayerForm = () => {
   const { teamId } = useParams()
 
   const getTeamName = async () => {
-    console.log(teamId)
     const response = await axios.get(
       `http://localhost:3001/api/teams/${teamId}`
     )
@@ -340,7 +339,7 @@ const PlayerForm = () => {
   }
 
   return(
-    <div>
+    <div className="player-form">
       <h2>Create Player for {teamName}</h2>
     <form className="player-form" onSubmit={handleOnSubmit}>
       <div className="form-element">

@@ -64,7 +64,6 @@ const Teams = () => {
       <div className="teams-header">
         <h1>Teams</h1>
       </div>
-      {/* <button>Add-team</button> */}
       <div className="teams-container">
         {teams.map((team) => (
           <div key={team._id}>

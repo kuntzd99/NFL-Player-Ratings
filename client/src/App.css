@@ -53,6 +53,11 @@ h1 {
 .team-card,
 .player-card {
   text-align: center;
+  border-style: solid;
+  border-radius: 10%;
+  padding: 10px;
+  border-width: 5px;
+  background-color: azure;
 }
 
 header {
@@ -69,17 +74,17 @@ a {
 }
 
 .team-image {
-  height: 80%;
-  width: 80%;
+  height: 200px;
+  width: 200px;
 }
 
 .team-card {
   border-style: solid;
   margin: 10px;
-  max-width: 50%;
   padding: 10px 0 10px 0;
   display: grid;
   border-radius: 10%;
+  border-width: 5px;
 }
 
 button {
@@ -102,8 +107,8 @@ input {
 }
 
 img {
-  height: 100px;
-  width: 100px;
+  height: 200px;
+  width: 200px;
 }
 
 .back {
@@ -112,4 +117,37 @@ img {
 
 .button-container {
   margin-top: 20px;
+}
+
+.teams-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+body {
+  background-color: rgb(250, 170, 156);
+}
+
+.team-form {
+  text-align: center;
+}
+
+button {
+  border-radius: 10%;
+}
+
+a,
+button {
+  border-style: solid;
+  background-color: white;
+  border-radius: 20%;
+  text-decoration: none;
+  color: black;
+  opacity: 1;
+  padding: 5px;
+  border-color: rgb(250, 170, 156);
+}
+
+h3 {
+  text-align: center;
 }

@@ -1,28 +1,13 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
-import { useNavigate } from 'react-router-dom'
-import { useParams } from 'react-router-dom'
 import PlayerCard from '../components/PlayerCard'
+import { useNavigate } from 'react-router-dom'
 
-const Players = () => {
+const Home = () => {
   const [players, setPlayers] = useState([])
-  const [teamName, setTeamName] = useState('')
-  const [teamColors, setTeamColors] = useState([])
-
-  const { teamId } = useParams()
-
-  const getTeamName = async () => {
-    const response = await axios.get(
-      `http://localhost:3001/api/teams/${teamId}`
-    )
-    setTeamName(response.data.team.name)
-    setTeamColors(response.data.team.teamColors)
-  }
 
   const getPlayers = async () => {
-    const response = await axios.get(
-      `http://localhost:3001/api/players/${teamId}`
-    )
+    const response = await axios.get(`http://localhost:3001/api/players`)
     let overalls = {}
     for (let i = 0; i < response.data.players.length; i++) {
       overalls[response.data.players[i]._id] = getOverall(
@@ -44,6 +29,7 @@ const Players = () => {
       )
       sortedPlayers.push(sortedPlayer.data.player)
     }
+    console.log(sortedPlayers)
     setPlayers(sortedPlayers)
   }
 
@@ -60,7 +46,6 @@ const Players = () => {
 
   useEffect(() => {
     getPlayers()
-    getTeamName()
   }, [])
 
   let navigate = useNavigate()
@@ -70,16 +55,8 @@ const Players = () => {
   }
 
   return (
-    <div>
-      <div className="teams-header">
-        <h1>{teamName} Players</h1>
-        <button
-          style={{ borderColor: teamColors[0] }}
-          onClick={() => navigate(`/players/create/${teamId}`)}
-        >
-          Add Player
-        </button>
-      </div>
+    <div className="home">
+      <h3>Best Players</h3>
       <div className="players-container">
         {players.map((player) => (
           <div key={player._id}>
@@ -89,7 +66,7 @@ const Players = () => {
               image={player.image}
               shortened={player.shortened}
               ratings={player.ratings}
-              team={teamId}
+              team={player.team}
               onClick={() => showPlayerDetails(player._id)}
             />
           </div>
@@ -99,4 +76,4 @@ const Players = () => {
   )
 }
 
-export default Players
+export default Home

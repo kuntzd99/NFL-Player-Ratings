@@ -18,6 +18,15 @@ const getPlayersByTeam = async (req, res) => {
   }
 }
 
+const getAllPlayers = async (req, res) => {
+  try {
+    const players = await Player.find()
+    return res.status(200).json({ players })
+  } catch (error) {
+    return res.status(500).send(error.message)
+  }
+}
+
 const getPlayerById = async (req, res) => {
   try {
     const player = await Player.findById(req.params.playerId)
@@ -68,6 +77,7 @@ const editPlayer = async (req, res) => {
 }
 
 module.exports = {
+  getAllPlayers,
   getPlayersByTeam,
   getPlayerById,
   createPlayer,

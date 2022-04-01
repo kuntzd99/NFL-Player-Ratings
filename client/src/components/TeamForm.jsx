@@ -52,7 +52,7 @@ const TeamForm = () => {
   }
 
   return(
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className="team-form">
       <label>Team name: </label>
       <input onChange={handleNameChange} type="text" name="name" required />
       <label>Location: </label>

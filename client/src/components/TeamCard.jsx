@@ -57,29 +57,36 @@ const TeamCard = (props) => {
     toggleDeleted(true)
   }
 
+  const myStyle = {
+    borderColor: props.teamColors[0],
+  }
+
   return(
     <div>
       {deleted ? <div></div> :
       editing ? 
-      <div className="team-card">
+      <div className="team-card" style={{borderColor: props.teamColors[0]}}>
         <form onSubmit={handleOnSubmit}>
           <input onChange={handleLocationChange} type="text" placeholder="Location" />
           <input onChange={handleNameChange} type="text" placeholder="Team Name" />
           <img className="team-image" src={props.image} alt={props.name} />
-          <button type="submit">Submit</button>
+          <div>
+            <button onClick={() => toggleEditing(false)}>Cancel</button>
+            <button type="submit" style={{borderColor: props.teamColors[0]}}>Submit</button>
+          </div>
         </form>
       </div> 
       :
       <div>
-        <div className="team-card">
+        <div className="team-card" style={{borderColor: props.teamColors[0]}}>
           <div onClick={props.onClick}>
             <h3>{location} {teamName}</h3>
             <img className="team-image" src={props.image} alt={teamName} />
           </div>
           <h3>Overall: {overall}</h3>
           <div className="button-container">
-            <button onClick={() => toggleEditing(!editing)}>Edit</button>
-            <button onClick={deleteTeam}>Delete</button>
+            <button style={{borderColor: props.teamColors[0]}} onClick={() => toggleEditing(!editing)}>Edit</button>
+            <button style={{borderColor: props.teamColors[0]}} onClick={deleteTeam}>Delete</button>
           </div>
         </div>
       </div>

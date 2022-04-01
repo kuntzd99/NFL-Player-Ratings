@@ -6,6 +6,8 @@ const router = Router()
 
 router.get('/teams', teamControllers.getAllTeams)
 
+router.get('/players', playerControllers.getAllPlayers)
+
 router.get('/players/:teamId', playerControllers.getPlayersByTeam)
 
 router.get('/details/:playerId', playerControllers.getPlayerById)
