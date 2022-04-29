@@ -65,6 +65,7 @@ const Teams = () => {
 
   return (
     <div>
+      <p>When deleting a team, you must refresh the page to see it gone</p>
       <div className="teams-header">
         <h1>Teams</h1>
       </div>
