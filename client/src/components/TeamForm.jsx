@@ -47,7 +47,7 @@ const TeamForm = () => {
       packagedPayLoad.image = 'https://upload.wikimedia.org/wikipedia/en/thumb/a/a2/National_Football_League_logo.svg/1200px-National_Football_League_logo.svg.png'
     }
     e.preventDefault()
-    axios.post(`/api/teams`, packagedPayLoad).catch((err) => console.log(err))
+    await axios.post(`/api/teams`, packagedPayLoad).catch((err) => console.log(err))
     navigate('/teams')
   }
 
