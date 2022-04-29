@@ -60,6 +60,7 @@ const Teams = () => {
 
   const deleteTeam = async (teamId) => {
     await axios.delete(`/api/teams/${teamId}`)
+    setTeams([])
     toggleDeleted(!deleted)
   }
 
@@ -69,22 +70,26 @@ const Teams = () => {
       <div className="teams-header">
         <h1>Teams</h1>
       </div>
-      <div className="teams-container">
-        {teams.map((team) => (
-          <div key={team._id}>
-            <TeamCard
-              name={team.name}
-              location={team.location}
-              image={team.image}
-              teamColors={team.teamColors}
-              id={team._id}
-              deleted={deleted}
-              deleteTeam={() => deleteTeam(team._id)}
-              onClick={() => showPlayers(team._id)}
-            />
-          </div>
-        ))}
-      </div>
+      {teams.length > 0 ? (
+        <div className="teams-container">
+          {teams.map((team) => (
+            <div key={team._id}>
+              <TeamCard
+                name={team.name}
+                location={team.location}
+                image={team.image}
+                teamColors={team.teamColors}
+                id={team._id}
+                deleted={deleted}
+                deleteTeam={() => deleteTeam(team._id)}
+                onClick={() => showPlayers(team._id)}
+              />
+            </div>
+          ))}
+        </div>
+      ) : (
+        <div>Loading</div>
+      )}
     </div>
   )
 }
