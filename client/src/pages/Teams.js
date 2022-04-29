@@ -61,7 +61,6 @@ const Teams = () => {
   const deleteTeam = async (teamId) => {
     await axios.delete(`/api/teams/${teamId}`)
     toggleDeleted(!deleted)
-    window.location.reload()
   }
 
   return (
