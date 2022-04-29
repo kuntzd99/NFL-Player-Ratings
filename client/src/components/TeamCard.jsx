@@ -28,7 +28,7 @@ const TeamCard = (props) => {
 
   useEffect(() => {
     getOverall()
-  }, [props.deleted])
+  }, [])
 
   const handleLocationChange = (e) => {
     e.preventDefault()
