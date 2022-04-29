@@ -50,7 +50,7 @@ const Teams = () => {
 
   useEffect(() => {
     getTeams()
-  }, [deleted])
+  }, [])
 
   let navigate = useNavigate()
 
@@ -61,7 +61,7 @@ const Teams = () => {
   const deleteTeam = async (teamId) => {
     await axios.delete(`/api/teams/${teamId}`)
     setTeams([])
-    toggleDeleted(!deleted)
+    await getTeams()
   }
 
   return (
