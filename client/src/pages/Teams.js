@@ -62,6 +62,7 @@ const Teams = () => {
     await axios.delete(`/api/teams/${teamId}`)
     setTeams([])
     await getTeams()
+    window.location.reload()
   }
 
   return (
